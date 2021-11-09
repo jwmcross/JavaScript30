@@ -37,17 +37,39 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    var arr1 = inventors.filter(i => (i.year >= 1500 && i.year < 1600));
+    console.log('1. Filter the list of inventors for those who were born in the 1500\'s');
+    console.log(arr1);
+
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    var arr2 = inventors.map(i => `${i.first} ${i.last}`);
+    console.log('2. Give us an array of the inventors first and last names');
+    console.log(arr2);
+
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    var arr3 = inventors.sort((a, b) => (a.year > b.year) ? 1 : -1);
+    console.log('3. Sort the inventors by birthdate, oldest to youngest');
+    console.table(arr3);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    var arr4 = inventors.reduce((total, i) => total + (i.passed - i.year),0);
+    console.log('4. How many years did all the inventors live all together')
+    console.log(arr4);
 
     // 5. Sort the inventors by years lived
+    var arr5 = inventors.sort((a, b) => {
+      const age1 = a.passed - a.year;
+      const age2 = b.passed - b.year;
+      return age1 > age2 ? 1 : -1;
+    });
+    console.log('5. Sort the inventors by years lived');
+    console.table(arr5);
+
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
@@ -55,10 +77,28 @@
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-
+    var arr7 = people.sort((a, b) => {
+      const [first1, last1] = a.split(', ');
+      const [first2, last2] = b.split(', ');
+      return first1 > first2 ? 1 : -1;
+    });
+    console.log('7. Sort the people alphabetically by last name');
+    console.table(arr7);
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+
+    var arr8 = data.reduce((sum, item) => {
+      if(!sum[item]) {
+        sum[item] = 0;
+      }
+      sum[item]++;
+      return sum;
+    }, {});
+    console.log('8. Sum up the instances of each of these key indexes');
+    console.log(arr8);
+
+
 
   </script>
 </body>
