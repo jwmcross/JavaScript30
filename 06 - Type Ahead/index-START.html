@@ -16,6 +16,56 @@
   </form>
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+const list = document.querySelector('ul.suggestions');
+const input = document.querySelector('.search');
+const cities = [];
+
+fetch(endpoint)
+  .then(blob => blob.json())
+  .then(data => cities.push(...data));
+
+
+function findMatches(searchTerm ,cities)
+{
+  return cities.filter(place => {
+    const regex = new RegExp(searchTerm, 'gi'); //g=global in strong. i=insenstive
+    return place.city.match(regex) || place.state.match(regex);
+  });
+}
+
+function reset()
+{
+  // reset the list
+}
+
+
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function displayList()
+{
+  const param = this.value;
+  const searchResults = findMatches(param ,cities);
+  const html = searchResults.map(place => {
+    const regex = new RegExp(param, 'gi');
+    const cityName = place.city.replace(regex, `<span class=\"hl\">${param}</span>`);
+    const stateName = place.state.replace(regex, `<span class=\"hl\">${param}</span>`);
+    const population = numberWithCommas(place.population);
+    return `
+      <li>
+        <span class="name">${cityName}, ${stateName}</span>
+        <span class="population">${population}</span>
+      </li>
+      `;
+  }).join('');
+  list.innerHTML = html;
+
+}
+
+
+input.addEventListener('change', displayList);
+input.addEventListener('keyup', displayList);
 
 </script>
 </body>
