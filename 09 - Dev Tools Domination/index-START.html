@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,29 +19,60 @@
     }
 
     // Regular
+    console.log('hello');
 
     // Interpolated
+    console.log('hello %s', 'john');
+    console.log(`hello ${john}`);
 
     // Styled
+    console.log('%c hello john', 'font-size:25px');
 
     // warning!
+    console.warn('hello warning');
 
-    // Error :|
+    // Error
+    console.error('hello error');
 
     // Info
+    console.info('hello random info');
 
     // Testing
+    console.asset(1 === 1, 'This is wrong. Assert failed');
 
     // clearing
-
+    console.clear() //clear console
+    
     // Viewing DOM Elements
+    const p = document.querySelector('p');
+    console.log(p); //shows the element
+    console.dir(p); //shows the properties
 
     // Grouping together
+    console.table(dogs);
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old`);
+      console.groupEnd(`${dog.name}`);
+    });
 
     // counting
+    console.count('John'); //counts whatever you put in. dom, var, w/e
+    console.count(p);
+    console.count(p);
+    console.count('John');
+    console.count('John');
 
     // timing
-
+    console.time('fetching data'); //start timer, key 
+    fetch('https://api.github.com/users/jwmcross')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data'); //end timer. using key
+        console.log(data);
+      });
   </script>
 </body>
 </html>
