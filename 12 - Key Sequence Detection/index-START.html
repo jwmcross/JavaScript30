@@ -7,6 +7,23 @@
 </head>
 <body>
 <script>
+
+const code = [];
+const secret = 'sexy';
+let i=0;
+window.addEventListener('keyup', (e) => {
+  console.log(e.key);
+   
+  code.push(e.key);
+
+  code.splice(-secret.length-1, code.length - secret.length);
+
+  if(code.join('') === secret) {
+    console.log('win');
+    cornify_add();2
+  }
+});
+
 </script>
 </body>
 </html>
