@@ -28,7 +28,52 @@
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const items = JSON.parse(localStorage.getItem('items')) || [];
+
+  function addItem(e) {
+    e.preventDefault();
+    const item = {
+      text: (this.querySelector('[name=item]')).value,
+      done: false
+    };
+    items.push(item);
+    populateList(items, itemsList);
+    updateStorage();
+    this.reset();
+
+  }
+
+  function populateList(plates = [], platesList) {
+    platesList.innerHTML = plates.map((plate, index) => {
+      return `
+        <li>
+          <input type="checkbox" data-index="${index}" id="item${index}" ${plate.done ? 'checked' : ''}/>
+          <label for="item${index}">${plate.text}</label>
+        </li>
+      `;
+    }).join('');
+  }
+
+  function checkItem(e) {
+    //item = items.find(item => item.text);
+    //items[${e.dataset.index}];
+    if(!e.target.matches('input')) return
+    const item = items[e.target.dataset.index];
+    item.done = !item.done;
+    //populateList(items, itemsList);
+    updateStorage();
+  }
+
+  function updateStorage() {
+    localStorage.setItem('items', JSON.stringify(items));
+  }
+
+  addItems.addEventListener('submit', addItem);
+  itemsList.addEventListener('click', checkItem);
+
+
+  
+  populateList(items, itemsList);
 
 </script>
 
