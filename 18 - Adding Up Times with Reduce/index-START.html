@@ -191,7 +191,7 @@
       return (mins * 60) + secs;
     })
     .reduce((total, seconds) => total += seconds);
-
+    let secondsLeft = totalSeconds;
     const hours = Math.floor(secondsLeft / 3600);
     secondsLeft = Math.floor(secondsLeft % 3600);
     const minutes = Math.floor(secondsLeft / 60);

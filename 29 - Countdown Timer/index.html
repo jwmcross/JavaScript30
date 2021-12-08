@@ -14,14 +14,19 @@
       <button data-time="900" class="timer__button">Quick 15</button>
       <button data-time="1200" class="timer__button">Snack 20</button>
       <button data-time="3600" class="timer__button">Lunch Break</button>
-      <form name="customForm" id="custom">
+      <form name="customForm" id="custom" style="border-right: 1px solid black">
         <input type="text" name="minutes" placeholder="Enter Minutes">
+      </form>
+      <form name="dateForm" id="customDate" style="border-right: 1px solid red">
+        <input type="datetime-local" name="date" placeholder="Select Date">
+        <input type="submit" value="OK"/>
       </form>
     </div>
     <div class="display">
       <h1 class="display__time-left"></h1>
       <p class="display__end-time"></p>
     </div>
+    <audio id="alarm" type="audio/wav" src="marimba-ringtone.wav"></audio>
   </div>
 
   <script src="scripts-START.js"></script>
